@@ -28,37 +28,40 @@ function operacao(parametroRecebidoDoHtml){
   let isOperator = operators.includes(parametroRecebidoDoHtml);
   valuesReceived.push(parametroRecebidoDoHtml)
   if(isOperator){
-    tela.value = '';
+    limparTela()
     // CRIAR UMA CHAMADA PARA CADA OPERACAO
-    switch(paramn) {
+    switch(parametroRecebidoDoHtml) {
       case '=':
         // identificar o operador e chamar a função correta
 
-        if(val === "+"){
-          let result = somar(val1, val2);
-        } else if(val === "-") {
-          let result = subtrair(val1, val2);
-        } else if(val === "/") {
-          let result = dividir(val1, val2);
-        } else if(val === "X") {
-          let result = multiplicar(val1, val2)
-        }
+        if(valuesReceived[1] === "+"){
+        let dadoRetornadoDaFuncao = somar()
+        tela.value = dadoRetornadoDaFuncao;
+          valuesReceived = []
+          limparTela()
+        } 
       
       break;
-      
-      case '-':
-        subtrair(val1,val2)
+      default:
+      console.log(parametroRecebidoDoHtml)
       break;
-      default
-      
+    }
+
   }else{
     tela.value = tela.value + parametroRecebidoDoHtml
   }
+}
+
+function somar() {
+  let result = valuesReceived[0] + valuesReceived[2];
+  return result
+}
+
+function limparTela() {
+  tela.value = '';
 }
 
 function adicionar(param) {
   params.push(param)
   tela.value = tela.value + param
 }
-
-console.log(params);
